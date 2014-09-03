@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "ofShader.h"
+#include "ofMain.h"
 
 class ofxHueShader
 {
@@ -69,6 +69,10 @@ public:
     {
         setup();
     }
+    ~ofxHueShader()
+    {
+        cout << "~ofxHueShader()" << endl;
+    }
     
     void begin(float _hue)
     {
@@ -83,16 +87,17 @@ public:
     
     
     static void beginShader(float _hue){
-        instance().begin(_hue);
+        instance()->begin(_hue);
     }
     static void endShader(){
-        instance().end();
+        instance()->end();
     }
     
-    static ofxHueShader& instance()
+    static ofPtr<ofxHueShader> instance()
     {
-        static ofxHueShader *factory = new ofxHueShader();
-        return *factory;
+        
+        static ofPtr<ofxHueShader>factory = ofPtr<ofxHueShader>(new ofxHueShader());
+        return factory;
     }
     
 };
