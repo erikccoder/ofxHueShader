@@ -13,3 +13,5 @@ how to use
 		hueShader.begin(hue);
 				tex.draw(0, 0);
 		hueShader.end();
+		
+VM("http://vimeo.com/54007714", print = TRUE)
