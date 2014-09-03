@@ -15,3 +15,4 @@ how to use
 		hueShader.end();
 		
 
+[![Demo](https://i.vimeocdn.com/video/487804082_960.jpg)](https://vimeo.com/105096648)
