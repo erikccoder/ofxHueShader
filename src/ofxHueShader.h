@@ -24,6 +24,7 @@ private:
                                         
                 uniform sampler2DRect inputTexture;
                 uniform float   hueAdjust;
+                uniform float   alpha;
                 void main ()
                 {
                     const vec4  kRGBToYPrime = vec4 (0.299, 0.587, 0.114, 0.0);
@@ -53,7 +54,10 @@ private:
                     color.r = dot (yIQ, kYIQToR);
                     color.g = dot (yIQ, kYIQToG);
                     color.b = dot (yIQ, kYIQToB);
-                    
+                    if(color.a > alpha)
+                    {
+                        color.a = alpha;
+                    }
                     gl_FragColor = color;
                 }
 );        
@@ -74,10 +78,12 @@ public:
         cout << "~ofxHueShader()" << endl;
     }
     
-    void begin(float _hue)
+    void begin(float _hue, float _alpha = 1)
     {
+        _alpha = ofClamp(_alpha, 0.0, 1.0);
         shader.begin();
         shader.setUniform1f("hueAdjust", _hue);
+        shader.setUniform1f("alpha", _alpha);
         //            hueShader.setUniformTexture("inputTexture", tex.getTextureReference(), 0);
     }
     
@@ -86,8 +92,8 @@ public:
     }
     
     
-    static void beginShader(float _hue){
-        instance()->begin(_hue);
+    static void beginShader(float _hue, float alpha = 1){
+        instance()->begin(_hue, alpha);
     }
     static void endShader(){
         instance()->end();
