@@ -3,14 +3,14 @@ ofxHueShader
 
 how to use
 ------
-		ofxHueShader::beginShader(hue);
+		ofxHueShader::beginShader(hue, aplha);
 				tex.draw(0, 0);
 		ofxHueShader::endShader();
 		
 		or
 		
 		ofxHueShader hueShader;		
-		hueShader.begin(hue);
+		hueShader.begin(hue, alpha);
 				tex.draw(0, 0);
 		hueShader.end();
 		
